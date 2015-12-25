@@ -125,12 +125,12 @@ public class KeyEventHandler {
 	}
 
 	private int getKeyCode(String keyData) {
-		System.out.println(keyData);
+//		System.out.println(keyData);
 		Integer val = codes.get(keyData);
 		if (val == null) {
 			return CHAR_UNDEFINED;
 		}
-		System.out.println(val.toString());
+//		System.out.println(val.toString());
 		return val.intValue();
 	}
 

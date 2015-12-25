@@ -36,7 +36,7 @@ public class MouseClass {
 			DatagramPacket packet = new DatagramPacket(data, 1024);
 			ss.receive(packet);
 			String str = new String(data, 0, packet.getLength());
-			// System.out.println(str);
+//			System.out.println(str);
 			String[] array = str.split(" ");
 			String action = array[0];
 			if (action.equals("moved")) {
@@ -56,8 +56,8 @@ public class MouseClass {
 			} else if (action.equals("scroll")) {
 				float scrollAmount = Float.parseFloat(array[1]);
 				mouseScroll(robot, scrollAmount);
-			} else if (action.equals("keydown") || action.equals("keyup")
-					|| action.equals("keyin")) {
+			} else if ((action.equals("keydown") || action.equals("keyup")
+					|| action.equals("keyin")) && array.length != 1) {
 				keyEventHandler.handleKeyEvent(robot, action, array[1]);
 			}
 		}
@@ -78,6 +78,7 @@ public class MouseClass {
 		}
 		catch (Exception e) {
 			System.out.println("Some internal error occured: " + e.toString());
+			e.printStackTrace();
 			System.exit(1);
 		}
 	}
