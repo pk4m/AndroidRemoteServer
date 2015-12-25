@@ -11,7 +11,8 @@
 
 ## Steps to run
 * Run the Remote.bat file on Windows / Remote.sh on Linux
-* Make sure the IP is not 127.0.0.1, which means the computer is not connected to a network
+* If the IP is displayed with an error message, it means the computer is not connected to a network
+* If there are multiple IP addresses shown then try using either. If it does not work then use the others. Multiple IPs can be shown in case of multiple connections to the network or virtual network cards are installed.
 * Enter the IP on the Android Remote phone application
 
 
