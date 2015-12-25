@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 
 import javax.swing.JFrame;
 
@@ -23,37 +26,50 @@ public class AppFrame extends JFrame {
 		setResizable(false);
 		setVisible(true);
 	}
-
+	
+	private String getIp() {
+		String ip = null;
+		try {
+			Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+			StringBuilder buff = new StringBuilder();
+			while(networkInterfaces.hasMoreElements()) {
+				NetworkInterface networkInterface = networkInterfaces.nextElement();
+				Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
+				while(inetAddresses.hasMoreElements()) {
+					InetAddress inetAddress = inetAddresses.nextElement();
+					//if the address is not a loopback address and is an IPv4 
+					if(!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+						buff.append(inetAddress.getHostAddress() + ", ");
+					}
+				}
+			}
+			
+			//remove the extra , added at the last
+			buff.delete(buff.length()-2, buff.length());
+			ip = buff.toString();
+		} catch (Exception e) {
+			ip = "Error determining IP address";
+		}
+		return ip;
+	}
+	
 	private void initializeVars() {
-		// TODO Auto-generated method stub
 		lines = new String[9];
 		lines[0] = "The server application is now running";
-		String Ip = "";
-		try {
-			String[] str = InetAddress.getLocalHost().toString().split("/");
-			Ip = str[str.length-1];
-		} catch (Exception e) {
-			Ip = "Error determining IP address";
-		}
+		String ip = getIp();
+		
 		lines[1] = " ";
-		lines[2] = "Your IP : " + Ip;
+		lines[2] = "Your IP : " + ip;
 		lines[3] = " ";
 		lines[4] = "Enter this IP on the start screen of the";
 		lines[5] = "Remote Mouse & Keyboard application on your phone to begin.";
 		lines[6] = " ";
 		lines[7] = " ";
-		lines[8] = "Copyright © 2013 Pandurang Kamath";
+		lines[8] = "Copyright 2013 Pandurang Kamath";
 	}
-
-	/*public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new AppFrame();
-		//frame.repaint();
-	}*/
 
 	@Override
 	public void paint(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paint(g);
 		Font fontHeader = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
 		Font fontNormal = new Font(Font.SERIF, Font.PLAIN, 14);

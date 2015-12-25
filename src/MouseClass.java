@@ -21,7 +21,6 @@ public class MouseClass {
 		try {
 			super.finalize();
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ss.close();
@@ -84,7 +83,6 @@ public class MouseClass {
 	}
 
 	private static void mouseScroll(Robot robot, float scrollAmount) {
-		// TODO Auto-generated method stub
 		float amount = scrollAmount * scrollsensitivity + remAmount;
 		int iAmount = Math.round(amount);
 		remAmount = amount - iAmount;
@@ -92,8 +90,6 @@ public class MouseClass {
 	}
 
 	private static void mouseMoved(Robot robot, float x, float y) {
-		// TODO Auto-generated method stub
-
 		float dispX = x * sensitivity + remX;
 		float dispY = y * sensitivity + remY;
 

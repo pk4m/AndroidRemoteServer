@@ -135,7 +135,6 @@ public class KeyEventHandler {
 	}
 
 	public void handleKeyEvent(Robot robot, String action, String keyData) {
-		// TODO Auto-generated method stub
 		populateHashMap();
 		int keyCode = getKeyCode(keyData);
 		if (keyCode == CHAR_UNDEFINED) {
